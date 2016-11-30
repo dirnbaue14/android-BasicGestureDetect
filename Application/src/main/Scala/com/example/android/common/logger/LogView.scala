@@ -24,17 +24,17 @@ import util.control.Breaks._
 class LogView(context: Context, attrs: AttributeSet = null, defStyle: Int = 0)
   extends TextView(context, attrs, defStyle) with LogNode {
 
-  def LogView(context: Context) {
-    LogView(context)
-  }
-
-  def LogView(context: Context, attrs: AttributeSet) {
-    LogView(context, attrs)
-  }
-
-  def LogView(context: Context, attrs: AttributeSet, defStyle: Int) {
-    LogView(context, attrs, defStyle)
-  }
+//  def LogView(context: Context) {
+//    LogView(context)
+//  }
+//
+//  def LogView(context: Context, attrs: AttributeSet) {
+//    LogView(context, attrs)
+//  }
+//
+//  def LogView(context: Context, attrs: AttributeSet, defStyle: Int) {
+//    LogView(context, attrs, defStyle)
+//  }
 
   def println(priority: Int, tag: String, msg: String, tr: Throwable) {
     var priorityStr: String = null

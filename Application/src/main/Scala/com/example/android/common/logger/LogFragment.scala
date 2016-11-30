@@ -62,7 +62,6 @@ class LogFragment extends Fragment {
     mLogView.setPadding(paddingPixels, paddingPixels, paddingPixels, paddingPixels)
     mLogView.setCompoundDrawablePadding(paddingPixels)
     mLogView.setGravity(Gravity.BOTTOM)
-    mLogView.setTextAppearance(getActivity, android.R.style.TextAppearance_Holo_Medium)
     mScrollView.addView(mLogView)
     mScrollView
   }

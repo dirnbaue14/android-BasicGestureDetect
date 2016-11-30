@@ -24,51 +24,51 @@ import util.control.Breaks._
 
 class GestureListener extends GestureDetector.SimpleOnGestureListener {
   override def onSingleTapUp(e: MotionEvent): Boolean = {
-    Log.i(GestureListener.TAG, "Single Tap Up" + getTouchType(e))
+    Log.i(GestureListener.TAG, "Single Tap Up" + GestureListener.getTouchType(e))
     false
   }
 
   override def onLongPress(e: MotionEvent) {
-    Log.i(GestureListener.TAG, "Long Press" + getTouchType(e))
+    Log.i(GestureListener.TAG, "Long Press" + GestureListener.getTouchType(e))
   }
 
   override def onScroll(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): Boolean = {
-    Log.i(GestureListener.TAG, "Scroll" + getTouchType(e1))
+    Log.i(GestureListener.TAG, "Scroll" + GestureListener.getTouchType(e1))
     false
   }
 
   override def onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean = {
-    Log.i(GestureListener.TAG, "Fling" + getTouchType(e1))
+    Log.i(GestureListener.TAG, "Fling" + GestureListener.getTouchType(e1))
     false
   }
 
   override def onShowPress(e: MotionEvent) {
-    Log.i(GestureListener.TAG, "Show Press" + getTouchType(e))
+    Log.i(GestureListener.TAG, "Show Press" + GestureListener.getTouchType(e))
   }
 
   override def onDown(e: MotionEvent): Boolean = {
-    Log.i(GestureListener.TAG, "Down" + getTouchType(e))
+    Log.i(GestureListener.TAG, "Down" + GestureListener.getTouchType(e))
     false
   }
 
   override def onDoubleTap(e: MotionEvent): Boolean = {
-    Log.i(GestureListener.TAG, "Double tap" + getTouchType(e))
+    Log.i(GestureListener.TAG, "Double tap" + GestureListener.getTouchType(e))
     false
   }
 
   override def onDoubleTapEvent(e: MotionEvent): Boolean = {
-    Log.i(GestureListener.TAG, "Event within double tap" + getTouchType(e))
+    Log.i(GestureListener.TAG, "Event within double tap" + GestureListener.getTouchType(e))
     false
   }
 
   override def onSingleTapConfirmed(e: MotionEvent): Boolean = {
-    Log.i(GestureListener.TAG, "Single tap confirmed" + getTouchType(e))
+    Log.i(GestureListener.TAG, "Single tap confirmed" + GestureListener.getTouchType(e))
     false
   }
-//}
+}
 
 
-//object GestureListener {
+object GestureListener {
   val TAG: String = "GestureListener"
 
   private def getTouchType(e: MotionEvent): String = {
