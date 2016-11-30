@@ -95,7 +95,7 @@ class LogView(context: Context, attrs: AttributeSet = null, defStyle: Int = 0)
       }
       return source.append(addStr).append(delimiter)
     }
-    source
+    return source
   }
 
   private[logger] var mNext: LogNode = null
