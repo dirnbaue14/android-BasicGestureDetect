@@ -20,7 +20,59 @@ import android.os.Build
 import android.view.GestureDetector
 import android.view.MotionEvent
 import com.example.android.common.logger.Log
-import util.control.Breaks._
+
+
+object GestureListener {
+  val TAG: String = "GestureListener"
+
+  private def getTouchType(e: MotionEvent): String = {
+    var touchTypeDescription: String = " "
+    val touchType: Int = e.getToolType(0)
+    touchType match {
+      case MotionEvent.TOOL_TYPE_FINGER =>
+        touchTypeDescription += "(finger)"
+      case MotionEvent.TOOL_TYPE_STYLUS =>
+        touchTypeDescription += "(stylus, "
+        val stylusPressure: Float = e.getPressure
+        touchTypeDescription += "pressure: " + stylusPressure
+        if (Build.VERSION.SDK_INT >= 21) {
+          touchTypeDescription += ", buttons pressed: " + getButtonsPressed(e)
+        }
+        touchTypeDescription += ")"
+
+      case MotionEvent.TOOL_TYPE_ERASER =>
+        touchTypeDescription += "(eraser)"
+      case MotionEvent.TOOL_TYPE_MOUSE =>
+        touchTypeDescription += "(mouse)"
+      case _ =>
+        touchTypeDescription += "(unknown tool)"
+    }
+    touchTypeDescription
+  }
+
+  @TargetApi(21) private def getButtonsPressed(e: MotionEvent): String = {
+    var buttons: String = ""
+    if (e.isButtonPressed(MotionEvent.BUTTON_PRIMARY)) {
+      buttons += " primary"
+    }
+    if (e.isButtonPressed(MotionEvent.BUTTON_SECONDARY)) {
+      buttons += " secondary"
+    }
+    if (e.isButtonPressed(MotionEvent.BUTTON_TERTIARY)) {
+      buttons += " tertiary"
+    }
+    if (e.isButtonPressed(MotionEvent.BUTTON_BACK)) {
+      buttons += " back"
+    }
+    if (e.isButtonPressed(MotionEvent.BUTTON_FORWARD)) {
+      buttons += " forward"
+    }
+    if (buttons == "") {
+      buttons = "none"
+    }
+    buttons
+  }
+}
 
 class GestureListener extends GestureDetector.SimpleOnGestureListener {
   override def onSingleTapUp(e: MotionEvent): Boolean = {
@@ -64,63 +116,6 @@ class GestureListener extends GestureDetector.SimpleOnGestureListener {
   override def onSingleTapConfirmed(e: MotionEvent): Boolean = {
     Log.i(GestureListener.TAG, "Single tap confirmed" + GestureListener.getTouchType(e))
     false
-  }
-}
-
-
-object GestureListener {
-  val TAG: String = "GestureListener"
-
-  private def getTouchType(e: MotionEvent): String = {
-    var touchTypeDescription: String = " "
-    val touchType: Int = e.getToolType(0)
-    touchType match {
-      case MotionEvent.TOOL_TYPE_FINGER =>
-        touchTypeDescription += "(finger)"
-        break //todo: break is not supported
-      case MotionEvent.TOOL_TYPE_STYLUS =>
-        touchTypeDescription += "(stylus, "
-        val stylusPressure: Float = e.getPressure
-        touchTypeDescription += "pressure: " + stylusPressure
-        if (Build.VERSION.SDK_INT >= 21) {
-          touchTypeDescription += ", buttons pressed: " + getButtonsPressed(e)
-        }
-        touchTypeDescription += ")"
-        break //todo: break is not supported
-      case MotionEvent.TOOL_TYPE_ERASER =>
-        touchTypeDescription += "(eraser)"
-        break //todo: break is not supported
-      case MotionEvent.TOOL_TYPE_MOUSE =>
-        touchTypeDescription += "(mouse)"
-        break //todo: break is not supported
-      case _ =>
-        touchTypeDescription += "(unknown tool)"
-        break //todo: break is not supported
-    }
-    touchTypeDescription
-  }
-
-  @TargetApi(21) private def getButtonsPressed(e: MotionEvent): String = {
-    var buttons: String = ""
-    if (e.isButtonPressed(MotionEvent.BUTTON_PRIMARY)) {
-      buttons += " primary"
-    }
-    if (e.isButtonPressed(MotionEvent.BUTTON_SECONDARY)) {
-      buttons += " secondary"
-    }
-    if (e.isButtonPressed(MotionEvent.BUTTON_TERTIARY)) {
-      buttons += " tertiary"
-    }
-    if (e.isButtonPressed(MotionEvent.BUTTON_BACK)) {
-      buttons += " back"
-    }
-    if (e.isButtonPressed(MotionEvent.BUTTON_FORWARD)) {
-      buttons += " forward"
-    }
-    if (buttons == "") {
-      buttons = "none"
-    }
-    buttons
   }
 }
 
